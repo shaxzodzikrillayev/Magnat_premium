@@ -1,0 +1,212 @@
+@use './variables' as *;
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: clamp(1.25rem, 5vw, 3rem);
+  background: $black;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.7s var(--ease),
+    visibility 0.7s var(--ease);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      60% 50% at 50% 50%,
+      rgba(212, 175, 55, 0.13),
+      transparent 70%
+    );
+    opacity: 0;
+    animation: pl-glow 1.4s var(--ease) 0.1s forwards;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(78vw, 520px);
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    border: 1px solid rgba(212, 175, 55, 0.12);
+    rotate: 45deg;
+    opacity: 0;
+    animation: pl-glow 1.6s var(--ease) 0.35s forwards;
+    pointer-events: none;
+  }
+
+  &.is-hiding {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: clamp(1rem, 3vw, 1.6rem);
+    width: min(460px, 100%);
+  }
+
+  &__mark {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: clamp(84px, 24vw, 116px);
+    aspect-ratio: 1;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    background: linear-gradient(150deg, rgba(212, 175, 55, 0.14), rgba(0, 0, 0, 0.2));
+    box-shadow:
+      0 0 60px -18px rgba(212, 175, 55, 0.75),
+      inset 0 0 34px -20px rgba(245, 215, 122, 0.9);
+    animation: pl-in 0.9s var(--ease) 0.05s both;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      width: clamp(14px, 4vw, 20px);
+      height: clamp(14px, 4vw, 20px);
+      border: 1px solid $gold-light;
+    }
+
+    &::before {
+      top: -5px;
+      left: -5px;
+      border-right: 0;
+      border-bottom: 0;
+    }
+
+    &::after {
+      right: -5px;
+      bottom: -5px;
+      border-left: 0;
+      border-top: 0;
+    }
+
+    span {
+      font-family: $font-display;
+      font-size: clamp(2rem, 8vw, 2.9rem);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      line-height: 1;
+      padding-left: 0.06em;
+      background: var(--grad-gold);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  &__brand {
+    font-family: $font-display;
+    font-size: clamp(1.2rem, 5.6vw, 2rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: clamp(0.12em, 0.7vw, 0.3em);
+    text-transform: uppercase;
+    margin-right: -0.3em;
+    background: linear-gradient(
+      100deg,
+      #8b6f22 0%,
+      #d4af37 32%,
+      #fff6d9 47%,
+      #d4af37 62%,
+      #8b6f22 100%
+    );
+    background-size: 240% 100%;
+    background-position: 130% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation:
+      pl-in 0.9s var(--ease) 0.35s both,
+      pl-shine 1.5s var(--ease) 0.75s 1 both;
+  }
+
+  &__bar {
+    position: relative;
+    width: min(320px, 82%);
+    height: 2px;
+    margin-top: clamp(0.5rem, 2vw, 1rem);
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    animation: pl-in 0.8s var(--ease) 0.85s both;
+
+    i {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: var(--grad-gold);
+      box-shadow: 0 0 14px rgba(212, 175, 55, 0.9);
+      transition: width 0.35s linear;
+    }
+  }
+}
+
+@keyframes pl-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pl-glow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pl-shine {
+  from {
+    background-position: 130% 0;
+  }
+  to {
+    background-position: -60% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader {
+    &::before,
+    &::after {
+      animation: none;
+      opacity: 1;
+    }
+
+    &__mark,
+    &__brand,
+    &__bar {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    &__brand {
+      background-position: 50% 0;
+    }
+
+    &__bar i {
+      transition: none;
+    }
+  }
+}

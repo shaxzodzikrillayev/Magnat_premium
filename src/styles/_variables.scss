@@ -1,0 +1,39 @@
+// ===== MAGNAT PREMIUM — design tokens =====
+
+// Palette (SCSS / compile time)
+$black: #050505;
+$graphite: #101010;
+$gold: #d4af37;
+$gold-light: #f5d77a;
+$white: #ffffff;
+$gray: #a3a3a3;
+
+$font-display: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+$font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+$ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+// Runtime tokens
+:root {
+  --black: #{$black};
+  --graphite: #{$graphite};
+  --gold: #{$gold};
+  --gold-light: #{$gold-light};
+  --white: #{$white};
+  --gray: #{$gray};
+
+  --font-display: #{$font-display};
+  --font-body: #{$font-body};
+  --ease: #{$ease};
+
+  --grad-gold: linear-gradient(
+    135deg,
+    #a8842a 0%,
+    #d4af37 28%,
+    #f5d77a 50%,
+    #d4af37 72%,
+    #a8842a 100%
+  );
+
+  color-scheme: dark;
+}
