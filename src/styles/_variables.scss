@@ -3,13 +3,14 @@
 // Palette (SCSS / compile time)
 $black: #050505;
 $graphite: #101010;
-$gold: #d4af37;
-$gold-light: #f5d77a;
-$white: #ffffff;
+$gold: #c6a15b;
+$gold-light: #e6d3a3;
+$gold-dark: #8c6b2f;
+$white: #f5f5f5;
 $gray: #a3a3a3;
 
-$font-display: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
-$font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+$font-display: 'Playfair Display', 'Times New Roman', Georgia, serif;
+$font-body: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
 $ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 
@@ -19,6 +20,7 @@ $ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --graphite: #{$graphite};
   --gold: #{$gold};
   --gold-light: #{$gold-light};
+  --gold-dark: #{$gold-dark};
   --white: #{$white};
   --gray: #{$gray};
 
@@ -28,11 +30,11 @@ $ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 
   --grad-gold: linear-gradient(
     135deg,
-    #a8842a 0%,
-    #d4af37 28%,
-    #f5d77a 50%,
-    #d4af37 72%,
-    #a8842a 100%
+    #8c6b2f 0%,
+    #c6a15b 28%,
+    #e6d3a3 50%,
+    #c6a15b 72%,
+    #8c6b2f 100%
   );
 
   color-scheme: dark;

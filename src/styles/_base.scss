@@ -22,8 +22,8 @@ body {
   min-height: 100svh;
   background-color: $black;
   background-image:
-    radial-gradient(900px 520px at 50% -6%, rgba(212, 175, 55, 0.1), transparent 62%),
-    radial-gradient(760px 460px at 50% 112%, rgba(212, 175, 55, 0.06), transparent 62%);
+    radial-gradient(900px 520px at 50% -6%, rgba(198, 161, 91, 0.08), transparent 62%),
+    radial-gradient(760px 460px at 50% 112%, rgba(198, 161, 91, 0.05), transparent 62%);
   color: $white;
   font-family: $font-body;
   font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
@@ -62,8 +62,16 @@ svg {
 }
 
 ::selection {
-  background: rgba(212, 175, 55, 0.3);
+  background: rgba(198, 161, 91, 0.3);
   color: $white;
+}
+
+.brand-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .visually-hidden {

@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import Preloader from './components/Preloader';
 import VisitCard from './components/VisitCard';
+import { useLanguage } from './hooks/useLanguage';
 
 export default function App() {
   const [ready, setReady] = useState(false);
+  const { lang, setLang, t } = useLanguage();
 
   const handleLoaded = useCallback(() => setReady(true), []);
 
@@ -16,8 +18,8 @@ export default function App() {
 
   return (
     <>
-      {!ready && <Preloader onDone={handleLoaded} />}
-      <VisitCard ready={ready} />
+      {!ready && <Preloader onDone={handleLoaded} label={t.loading} />}
+      <VisitCard ready={ready} lang={lang} onLangChange={setLang} t={t} />
     </>
   );
 }

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { SITE } from '../config/site';
+import BrandLogo from './BrandLogo';
 
 /** Время старта приложения — прогресс не сбрасывается при ре-маунте. */
 const bootAt = Date.now();
@@ -12,7 +12,7 @@ const prefersReducedMotion = (): boolean =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /**
- * Реальное ожидание ресурсов: window.load + шрифты.
+ * Реальное ожидание ресурсов: window.load (включая логотип) + шрифты.
  * Минимум — время на проигрывание анимации, максимум — жёсткий лимит,
  * чтобы загрузчик не мог «зависнуть» навсегда. Ошибки не блокируют показ сайта.
  */
@@ -51,9 +51,10 @@ function waitForAssets(): Promise<void> {
 
 interface PreloaderProps {
   onDone: () => void;
+  label: string;
 }
 
-export default function Preloader({ onDone }: PreloaderProps) {
+export default function Preloader({ onDone, label }: PreloaderProps) {
   const fillRef = useRef<HTMLElement>(null);
   const doneRef = useRef(false);
   const calledRef = useRef(false);
@@ -105,13 +106,10 @@ export default function Preloader({ onDone }: PreloaderProps) {
       className={`preloader${hiding ? ' is-hiding' : ''}`}
       role="status"
       aria-live="polite"
-      aria-label={`Загрузка сайта ${SITE.name}`}
+      aria-label={label}
     >
       <div className="preloader__inner">
-        <div className="preloader__mark" aria-hidden="true">
-          <span>{SITE.monogram}</span>
-        </div>
-        <div className="preloader__brand">{SITE.name}</div>
+        <BrandLogo className="brand-logo--preloader" />
         <div className="preloader__bar">
           <i ref={fillRef} />
         </div>
